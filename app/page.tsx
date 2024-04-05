@@ -2,33 +2,31 @@ import Hero from "@/components/Hero";
 import MovieGrid from "@/components/MovieGrid";
 import Trending from "@/components/Trending";
 
-import { getData, getMovies } from "@/lib/fetch";
-
-
+import { getData, getMovies, getTopRated } from "@/lib/fetch";
 
 export default async function Home() {
-
-
-  const { results: data } = await getData(`trending/movie/day?sort_by=popularity.desc&api_key=${process.env.API_KEY}&page`);
-
-  const {results: movies} = await getMovies("1","movie")
-  const {results: tvshows} = await getMovies("1", "tv");
-  const { results: comedyShows } = await getMovies(
-    "1",
-    "tv",
-    "with_genres=35"
+  const { results: data } = await getData(
+    `trending/movie/day?sort_by=popularity.desc&api_key=${process.env.API_KEY}&page`
   );
 
+  const { results: movies } = await getMovies("1", "movie");
+  const { results: tvshows } = await getTopRated("2", "tv");
+  const { results: comedyShows } = await getMovies("1", "tv", "with_genres=35");
 
+  const { results: topRatedTVShows } = await getTopRated("1", "tv");
 
   const mostVotes = Math.max(
     ...data.map((movie: { vote_count: number }) => movie.vote_count)
   );
 
-  const { id, title, backdrop_path:image, overview:description } = data.filter(
+  const {
+    id,
+    title,
+    backdrop_path: image,
+    overview: description,
+  } = data.filter(
     ({ vote_count }: { vote_count: number }) => vote_count === mostVotes
   )[0];
-
 
   return (
     <main>
@@ -44,7 +42,7 @@ export default async function Home() {
           title="Popular TV shows"
         />
 
-        <Trending movies={comedyShows} title="Comedy TV Shows" />
+        <Trending movies={topRatedTVShows} title="Top Rated TV Shows" />
 
         <MovieGrid
           movies={movies?.filter(

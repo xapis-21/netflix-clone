@@ -9,7 +9,19 @@ export const getData = async (url: string) => {
 
 export const getMovies = async (page: string, type: "tv" | "movie", genre?: string ) => {
   const res = await fetch(
-    `${baseURL}/discover/${type}?include_adult=true&include_video=false&language=en-US&page=${page}&sort_by=popularity.desc&api_key=${process.env.API_KEY}&${genre}`
+    `${baseURL}/discover/${type}?include_adult=true&include_video=false&page=${page}&sort_by=popularity.desc&api_key=${process.env.API_KEY}&${genre}`
   );
   return res.json();
 };
+
+export const getTopRated = async (
+  page: string,
+  type: "tv" | "movie",
+  genre?: string
+) => {
+  const res = await fetch(
+    `${baseURL}/${type}/top_rated?include_adult=true&include_video=false&page=${page}&sort_by=popularity.desc&api_key=${process.env.API_KEY}&${genre}`
+  );
+  return res.json();
+};
+
