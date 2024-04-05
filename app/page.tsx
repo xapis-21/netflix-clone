@@ -16,7 +16,7 @@ export default async function Home() {
   const { results: topRatedTVShows } = await getTopRated("1", "tv");
 
   const mostVotes = Math.max(
-    ...data.map((movie: { vote_count: number }) => movie.vote_count)
+    ...data.map((movie: { popularity: number }) => movie.popularity)
   );
 
   const {
@@ -25,7 +25,7 @@ export default async function Home() {
     backdrop_path: image,
     overview: description,
   } = data.filter(
-    ({ vote_count }: { vote_count: number }) => vote_count === mostVotes
+    ({ popularity }: { popularity: number }) => popularity === mostVotes
   )[0];
 
   return (
