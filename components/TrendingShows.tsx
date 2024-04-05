@@ -1,3 +1,44 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 import TrendingCard from "@/components/TrendingCard";
 
 import {
@@ -13,8 +54,7 @@ type TrendingProps = {
   movies: {
     backdrop_path: string;
     id: number;
-    name?: string
-    title?: string;
+    name: string
   }[];
   title: string
 };
@@ -36,9 +76,9 @@ const Trending = ({ movies,title }: TrendingProps) => {
               className="w-full"
             >
               <CarouselContent>
-                {movies.map(({ backdrop_path, id, title,name }, index) => (
+                {movies.map(({ backdrop_path, id, name }, index) => (
                   <CarouselItem key={id} className="md:basis-1/2 lg:basis-1/5">
-                    <TrendingCard image={backdrop_path} id={id} title={title || name} />
+                    <TrendingCard image={backdrop_path} id={id} title={title} />
                   </CarouselItem>
                 ))}
               </CarouselContent>

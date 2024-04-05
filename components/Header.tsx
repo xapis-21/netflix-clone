@@ -5,7 +5,7 @@ import Container from "./Container";
 
 const Header = () => {
   return (
-    <header className="py-4 fixed w-full">
+    <header className="py-4 fixed w-full z-50 bg-gradient-to-b from-gray-900 via-gray-900/50 to-transparent">
       <Container>
         <nav className="flex justify-between items-center w-full">
           <Link href="/">

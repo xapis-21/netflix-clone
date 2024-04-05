@@ -4,10 +4,12 @@ import { IMG_PATH } from "@/lib/fetch";
 type TrendingCardProps = {
   image: string;
   id: number;
-  title: string;
+  title?: string;
+  name?:string
 };
 
-const TrendingCard = ({image,title,id}:TrendingCardProps) => {
+const TrendingCard = ({image,title,id,name}:TrendingCardProps) => {
+  console.log(title||name);
   return (
     <div className="flex flex-col gap-4">
       <Image
@@ -17,7 +19,7 @@ const TrendingCard = ({image,title,id}:TrendingCardProps) => {
         width={280}
         className="rounded-md"
       />
-      <h3 className="text-slate-300 font-semibold">{title}</h3>
+      <h3 className="text-slate-300 font-semibold">{title || name}</h3>
     </div>
   );
 }
